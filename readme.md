@@ -69,25 +69,24 @@ blue-green-deployment-aws/
 |-- green/
 |   |-- user-data.sh          (Green server startup script - Version 2.0)
 |
-|-- docs/
-    |-- screenshots/
-        |-- 01_Blue_Launch_Template_created.png
-        |-- 02_Blue_TG_created.png
-        |-- 03_Blue_ASG.png
-        |-- 04_Blue_ASG_running_with_2_healthy_instances.png
-        |-- 05_ALB_active.png
-        |-- 06_Blue_website_live_in_browser.png
-        |-- 07_Green_Launch_Template_created.png
-        |-- 08_Green_TG_created.png
-        |-- 09_Green_ASG_created.png
-        |-- 10_Blue_and_Green_instances_running.png
-        |-- 11_Green_website_verified_directly.png
-        |-- 12_Green_now_live_through_ALB.png
-        |-- 13_Rolled_back_to_Blue.png
-        |-- 14_80_Green_20_Blue.png
-        |-- 15_50-50_split.png
-        |-- 16_0_Blue_100_Green.png
-        |-- 17_Full_Green_deployment_complete.png
+|-- screenshots/
+    |-- 01_Blue_Launch_Template_created.png
+    |-- 02_Blue_TG_created.png
+    |-- 03_Blue_ASG.png
+    |-- 04_Blue_ASG_running_with_2_healthy_instances.png
+    |-- 05_ALB_active.png
+    |-- 06_Blue_website_live_in_browser.png
+    |-- 07_Green_Launch_Template_created.png
+    |-- 08_Green_TG_created.png
+    |-- 09_Green_ASG_created.png
+    |-- 10_Blue_and_Green_instances_running.png
+    |-- 11_Green_website_verified_directly.png
+    |-- 12_Green_now_live_through_ALB.png
+    |-- 13_Rolled_back_to_Blue.png
+    |-- 14_80_Green_20_Blue.png
+    |-- 15_50-50_split.png
+    |-- 16_0_Blue_100_Green.png
+    |-- 17_Full_Green_deployment_complete.png
 ```
 
 ## How I Built This
@@ -104,7 +103,7 @@ I created `blue-launch-template` (t3.micro) with a User Data script that install
 
 Screenshot: `01_Blue_Launch_Template_created.png`
 
-![Blue Launch Template](docs/screenshots/01_Blue_Launch_Template_created.png)
+![Blue Launch Template](screenshots/01_Blue_Launch_Template_created.png)
 
 #### Step 2 - Target Group
 
@@ -114,7 +113,7 @@ I created `blue-tg` with protocol HTTP on port 80 and target type Instance.
 
 Screenshot: `02_Blue_TG_created.png`
 
-![Blue Target Group](docs/screenshots/02_Blue_TG_created.png)
+![Blue Target Group](screenshots/02_Blue_TG_created.png)
 
 #### Step 3 - Auto Scaling Group
 
@@ -124,13 +123,13 @@ I created `blue-asg` using `blue-launch-template` with desired capacity 2 and sc
 
 Screenshot: `03_Blue_ASG.png`
 
-![Blue ASG](docs/screenshots/03_Blue_ASG.png)
+![Blue ASG](screenshots/03_Blue_ASG.png)
 
 Both Blue instances (one in ap-south-1a and one in ap-south-1b) are in the Running state and have passed 3/3 status checks.
 
 Screenshot: `04_Blue_ASG_running_with_2_healthy_instances.png`
 
-![Blue ASG instances running](docs/screenshots/04_Blue_ASG_running_with_2_healthy_instances.png)
+![Blue ASG instances running](screenshots/04_Blue_ASG_running_with_2_healthy_instances.png)
 
 #### Step 4 - Application Load Balancer
 
@@ -140,7 +139,7 @@ I created `myapp-alb` as an internet-facing Application Load Balancer with an HT
 
 Screenshot: `05_ALB_active.png`
 
-![ALB Active](docs/screenshots/05_ALB_active.png)
+![ALB Active](screenshots/05_ALB_active.png)
 
 #### Step 5 - Verified Blue is Live
 
@@ -148,7 +147,7 @@ I opened the ALB DNS name in the browser and confirmed that Version 1.0 from the
 
 Screenshot: `06_Blue_website_live_in_browser.png`
 
-![Blue website live](docs/screenshots/06_Blue_website_live_in_browser.png)
+![Blue website live](screenshots/06_Blue_website_live_in_browser.png)
 
 ### Phase 2 - Green Environment (Version 2.0)
 
@@ -160,7 +159,7 @@ I created `green-launch-template` with a new User Data script that deploys Versi
 
 Screenshot: `07_Green_Launch_Template_created.png`
 
-![Green Launch Template](docs/screenshots/07_Green_Launch_Template_created.png)
+![Green Launch Template](screenshots/07_Green_Launch_Template_created.png)
 
 #### Step 7 - Green Target Group
 
@@ -168,7 +167,7 @@ I created `green-tg` with the same settings as `blue-tg` (HTTP, port 80, target 
 
 Screenshot: `08_Green_TG_created.png`
 
-![Green Target Group](docs/screenshots/08_Green_TG_created.png)
+![Green Target Group](screenshots/08_Green_TG_created.png)
 
 #### Step 8 - Green Auto Scaling Group
 
@@ -176,13 +175,13 @@ I created `green-asg` from `green-launch-template` and attached it to `green-tg`
 
 Screenshot: `09_Green_ASG_created.png`
 
-![Green ASG](docs/screenshots/09_Green_ASG_created.png)
+![Green ASG](screenshots/09_Green_ASG_created.png)
 
 Now Blue and Green run side by side: 2 Blue and 2 Green instances in ap-south-1a and ap-south-1b. Blue serves all live traffic and Green receives none.
 
 Screenshot: `10_Blue_and_Green_instances_running.png`
 
-![Blue and Green instances](docs/screenshots/10_Blue_and_Green_instances_running.png)
+![Blue and Green instances](screenshots/10_Blue_and_Green_instances_running.png)
 
 #### Step 9 - Tested Green Directly
 
@@ -190,7 +189,7 @@ Before sending any user traffic to Green, I opened a Green instance by its publi
 
 Screenshot: `11_Green_website_verified_directly.png`
 
-![Green verified directly](docs/screenshots/11_Green_website_verified_directly.png)
+![Green verified directly](screenshots/11_Green_website_verified_directly.png)
 
 ### Phase 3 - Zero Downtime Deployment
 
@@ -202,7 +201,7 @@ ALB -> Listeners -> Edit HTTP:80 -> change the target group from `blue-tg` to `g
 
 Screenshot: `12_Green_now_live_through_ALB.png`
 
-![Green live through ALB](docs/screenshots/12_Green_now_live_through_ALB.png)
+![Green live through ALB](screenshots/12_Green_now_live_through_ALB.png)
 
 #### Step 11 - Rollback Test
 
@@ -210,7 +209,7 @@ To test the rollback, I pointed the listener back to `blue-tg`. The ALB URL imme
 
 Screenshot: `13_Rolled_back_to_Blue.png`
 
-![Rolled back to Blue](docs/screenshots/13_Rolled_back_to_Blue.png)
+![Rolled back to Blue](screenshots/13_Rolled_back_to_Blue.png)
 
 ### Phase 4 - Canary Deployment
 
@@ -225,7 +224,7 @@ Instead of moving all users at once, a canary deployment shifts traffic to the n
 
 Screenshot: `14_80_Green_20_Blue.png`
 
-![80/20 split](docs/screenshots/14_80_Green_20_Blue.png)
+![80/20 split](screenshots/14_80_Green_20_Blue.png)
 
 #### Step 13 - 50% Green / 50% Blue
 
@@ -236,7 +235,7 @@ Screenshot: `14_80_Green_20_Blue.png`
 
 Screenshot: `15_50-50_split.png`
 
-![50/50 split](docs/screenshots/15_50-50_split.png)
+![50/50 split](screenshots/15_50-50_split.png)
 
 #### Step 14 - 0% Blue / 100% Green
 
@@ -249,7 +248,7 @@ Green stayed stable at 50%, so I moved all traffic to Green by setting the Blue 
 
 Screenshot: `16_0_Blue_100_Green.png`
 
-![0% Blue 100% Green](docs/screenshots/16_0_Blue_100_Green.png)
+![0% Blue 100% Green](screenshots/16_0_Blue_100_Green.png)
 
 #### Step 15 - Full Green Deployment Complete
 
@@ -257,7 +256,7 @@ Finally, `blue-tg` was removed from the listener, so the listener forwards 100% 
 
 Screenshot: `17_Full_Green_deployment_complete.png`
 
-![Full Green deployment complete](docs/screenshots/17_Full_Green_deployment_complete.png)
+![Full Green deployment complete](screenshots/17_Full_Green_deployment_complete.png)
 
 ## Results Summary
 
